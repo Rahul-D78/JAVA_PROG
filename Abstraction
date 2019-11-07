@@ -1,0 +1,32 @@
+public abstract class Mobile {
+	
+	public abstract void doubleTap();
+	
+	//no implemaintaintation is done in abstract class
+	//it doesnot contain any body
+	//it can not be instantiated
+	//because for the abstract methods
+	//common functonality we can declare
+	//abstract class cointain abstract method
+	//guidline class
+	//whic provides the functional details
+	
+	public void abc() {
+		System.out.println("i am abc");
+	}
+
+}
+public class Android extends Mobile {
+	
+	public void doubleTap() {
+		System.out.println("android double tap");
+	}
+
+}
+public class Ios extends Mobile{
+
+	public  void doubleTap() {
+		System.out.println("ios double tap");
+	}
+}
+
