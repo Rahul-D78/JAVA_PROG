@@ -1,0 +1,68 @@
+class Printer{
+		
+//	synchronized public void printDoc(int numOfCopies, String Docname) { //synchronized method after completion of one thread 
+	                                                                    //another thread grts executed
+	public void printDoc(int numOfCopies, String Docname) {          
+		for(int i = 1; i <= numOfCopies; i++) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("printing" + Docname +" "+ i );
+			}
+		}
+}
+
+class MyThread extends Thread {
+	
+	Printer pref;
+	
+	MyThread(Printer p) {
+		pref = p;
+		}
+	public void run() {
+		synchronized(pref) {                          //synchronized block
+		    pref.printDoc(10, "Rahul's profile");
+	}
+	}
+}
+class YourThread extends Thread {
+		
+		Printer pref;
+		
+		YourThread(Printer p) {
+			pref = p;
+			}
+		public void run() {
+			synchronized(pref) {                   
+				//synchrionized block
+			pref.printDoc(10, "someone's profile");
+			}
+		}
+		}
+public class SyncApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("application started");
+		
+		Printer printer = new Printer();
+		
+		MyThread mref = new MyThread(printer);
+		YourThread yref = new YourThread(printer); //mythread is having a reference to the printer object
+		 											////yourthread is having a reference to the printer objec 
+        
+		mref.start();
+		/*try {
+			mref.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		yref.start();
+		
+		System.out.println("application ended");
+		}
+}
